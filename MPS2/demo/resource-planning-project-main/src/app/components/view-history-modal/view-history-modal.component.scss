@@ -1,0 +1,44 @@
+
+.modal {
+  text-align: center;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: top;
+}
+
+.modal {
+  .close, .close-btn:active {
+    margin-top: -40px;
+    margin-right: -35px;
+    box-shadow: 0 0 0 0rem rgba(255, 255, 255, 0.25);
+  }
+
+  &-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    width: 90%;
+    max-width: 1000px;
+    border-radius: 5px;
+  }
+
+  &-content {
+    padding: 30px 55px;
+    border-radius: 5px;
+    border: 0px solid white;
+  }
+
+  &-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+
+
+}
+
+

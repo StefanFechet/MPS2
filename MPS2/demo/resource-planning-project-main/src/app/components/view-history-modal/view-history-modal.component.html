@@ -1,0 +1,60 @@
+<div
+  class="modal fade"
+  data-backdrop="true"
+  id="viewHistoryModal"
+  role="dialog"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="row">
+        <div class="d-flex justify-content-between col-12">
+          <div class="modal-title">
+            <span>
+              Istoric {{ classroomName }}
+            </span>
+          </div>
+          <button
+            (click)="hideModal()"
+            aria-label="Close"
+            class="btn close"
+            data-dismiss="modal"
+            type="button"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Utilizator</th>
+            <th scope="col">Start</th>
+            <th scope="col">Finish</th>
+            <th scope="col">Motiv</th>
+            <th scope="col">Estimat</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let row of tableData">
+          <tr>
+            <td>
+              {{ row.userName }}
+            </td>
+            <td>
+              {{ row.start | date:'short'}}
+            </td>
+            <td>
+              {{ row.finish  | date:'short'}}
+            </td>
+            <td>
+              {{ row.motiv }}
+            </td>
+            <td>
+              {{ row.estimat_rezervare}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

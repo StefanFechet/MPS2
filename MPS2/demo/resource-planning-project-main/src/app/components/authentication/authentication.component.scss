@@ -1,0 +1,40 @@
+.auth-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-signin {
+  width: 80%;
+  max-width: 400px;
+  margin-right: 15%;
+}
+
+.login-img {
+  width: 70%;
+  max-width: 800px;
+  height: auto;
+  @media (max-width: 1200px) {
+    width: 90%;
+  }
+}
+
+.welcome-text {
+  &-title {
+    font-size: 32px;
+    line-height: 40px;
+    margin-bottom: 40px;
+    color: lightgray;
+  }
+}
+
+.password-toggler {
+  position: absolute;
+  float: right;
+  margin-left: -20px;
+  cursor: pointer;
+}
+
+.mat-form-field {
+  width: 100%;
+}
