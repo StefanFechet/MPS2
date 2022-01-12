@@ -3,9 +3,9 @@
 ## Database
 Baza de date (MySQL) ruleaza intr-un container Docker.
 Se numeste **mps_project_2** si are tabelele User, Sala, Rezervare cu structura de [aici](https://dbdiagram.io/d/5fd88bb99a6c525a03bb1dcc).
-Pentru a porni baza de date pe portul 3306 se foloseste:
+Pentru a porni baza de date pe portul 3307 se foloseste:
 ```
-docker run --name mysql-db -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -v {absolute_path_to_projects_root}/mysql-db-data:/var/lib/mysql mysql
+docker run --name mysql-db -d -p 3307:3307 -e MYSQL_ROOT_PASSWORD=root -v {absolute_path_to_projects_root}/mysql-db-data:/var/lib/mysql mysql
 ```
 Pentru a intra in container:
 ```
