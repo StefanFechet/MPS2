@@ -19,6 +19,7 @@ import {AuthenticationComponent} from './components/authentication/authenticatio
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {ViewHistoryModalComponent} from './components/view-history-modal/view-history-modal.component';
 import {BookClassroomModalComponent} from './components/book-classroom-modal/book-classroom-modal.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {BookClassroomModalComponent} from './components/book-classroom-modal/boo
     AuthenticationComponent,
     DashboardComponent,
     ViewHistoryModalComponent,
-    BookClassroomModalComponent
+    BookClassroomModalComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

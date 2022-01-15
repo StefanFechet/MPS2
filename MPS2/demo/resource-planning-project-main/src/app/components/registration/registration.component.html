@@ -29,10 +29,6 @@
           <button (click)="loginUser()" [disabled]="signinForm.status == 'INVALID'"
                   class="btn btn-block btn-light" type="submit">Sign in
           </button>
-          <div class="text-container">
-            <span>You don't have an account?&nbsp;</span>
-            <a [routerLink]="['/register']" class="btn btn-link">Register</a>
-          </div>
         </form>
 
       </div>
