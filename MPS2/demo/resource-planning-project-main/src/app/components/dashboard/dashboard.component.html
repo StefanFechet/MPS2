@@ -2,33 +2,10 @@
   <script crossorigin="anonymous" src="https://kit.fontawesome.com/18450ed4eb.js"></script>
 </head>
 <div class="d-flex">
-  <div class="sidebar">
-    <div class="user-details">
-      <img class="user-details-avatar" src="/assets/profile-pic2.jpg"/>
-      <div class="user-details-name">
-        {{ currentUser.nume }} {{ currentUser.prenume }}
-      </div>
-      <!-- <div class="user-details-email">
-        {{ currentUser.mail }}
-      </div> -->
-      <div *ngIf="currentUser.permisiune == 1; else student" class="user-details-email">
-        profesor
-      </div>
-      <ng-template #student>
-        <div class="user-details-email">
-          student
-        </div>
-      </ng-template>
-    </div>
-    <div
-      (click)="doLogout()"
-      class="logout-btn mt-5"
-    >
-      Logout
-    </div>
-  </div>
-
+  <app-sidemenu [tab]="tab"></app-sidemenu>
   <div class="dashboard">
+    <h3>Dashboard</h3>
+    <mat-divider></mat-divider>
     <table class="table table-hover">
       <thead>
       <tr>

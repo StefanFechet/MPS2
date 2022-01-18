@@ -11,7 +11,7 @@
 }
 
 .login-img {
-  width: 70%;
+  width: 80%;
   max-width: 800px;
   height: auto;
   @media (max-width: 1200px) {
@@ -37,4 +37,27 @@
 
 .mat-form-field {
   width: 100%;
+}
+
+.text-container {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#login {
+  background: #2a4a4a;
+  color: white;
+}
+
+#login:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.logo {
+  position: absolute;
+  left: 0;
+  top: 0;
 }

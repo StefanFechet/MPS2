@@ -30,6 +30,12 @@ public class MainController {
         return userDao.getAll();
     }
 
+    @PostMapping("/register")
+    public void registerUser(@RequestParam String nume, @RequestParam String prenume, @RequestParam boolean permisiune, @RequestParam String mail, String parola) {
+        User user = new User(nume, prenume, permisiune, mail, parola);
+        userDao.registerUser(user);
+    }
+
     @GetMapping("/sali")
     public List<Sala> getAllRooms() {
         rezervareDao.updateSalaStatus();

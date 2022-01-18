@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <div class="row" style="height: 90vh;">
     <div class="col-6" style="display: flex; align-items: center;">
+      <img class="logo" src="/assets/logo.png"/>
       <div class="auth-wrapper">
         <form [formGroup]="signinForm" class="form-signin">
           <div class="welcome-text">
@@ -26,16 +27,20 @@
             </button>
           </mat-form-field>
 
-          <button (click)="loginUser()" [disabled]="signinForm.status == 'INVALID'"
+          <button (click)="loginUser()" [disabled]="signinForm.status == 'INVALID'" id="login"
                   class="btn btn-block btn-light" type="submit">Sign in
           </button>
+          <div class="text-container">
+            <span>You don't have an account?&nbsp;</span>
+            <a [routerLink]="['/register']" class="btn btn-link">Register</a>
+          </div>
         </form>
 
       </div>
     </div>
     <div class="col-6" style="display: flex; align-items: center;">
       <div>
-        <img class=" login-img" src="/assets/login-img.svg">
+        <img class=" login-img" src="/assets/login1.png">
       </div>
     </div>
   </div>

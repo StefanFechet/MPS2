@@ -46,20 +46,20 @@ export class AuthenticationComponent implements OnInit {
 
     this.users.forEach(user => {
       if (
-        this.signinForm.value.email == user.mail &&
-        this.signinForm.value.password == user.parola
+        this.signinForm.value.email === user.mail &&
+        this.signinForm.value.password === user.parola
       ) {
         userExists = true;
         currentUser = user;
       }
-    })
+    });
 
     if (userExists) {
       this.authService.signIn(currentUser);
       this.router.navigate(['dashboard']);
       this.snackBar.openSnackBar('Successfully logged in!', 'success-snackbar');
     } else {
-      this.snackBar.openSnackBar("User doesn't exist.", 'error-snackbar');
+      this.snackBar.openSnackBar('User doesn\'t exist.', 'error-snackbar');
     }
 
   }

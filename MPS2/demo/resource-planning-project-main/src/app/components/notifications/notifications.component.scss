@@ -1,0 +1,21 @@
+.dashboard {
+  height: 100vh;
+  width: calc(100% - 250px);
+  padding: 35px;
+  margin-left: 250px;
+}
+
+.table-icon {
+  cursor: pointer;
+}
+
+.notification_card {
+  background: #84B8C5;
+  color: white;
+  border-radius: 5px;
+  padding: 2vh;
+  margin-top: 3vh;
+  font-size: 2vh;
+
+}
+

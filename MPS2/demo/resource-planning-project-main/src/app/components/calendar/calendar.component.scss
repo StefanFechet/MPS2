@@ -1,0 +1,19 @@
+.dashboard {
+  height: 100vh;
+  width: calc(100% - 250px);
+  padding: 35px;
+  margin-left: 250px;
+}
+
+.row {
+  margin-top: 2vh;
+}
+
+.btn-primary {
+  background: #84B8C5;
+  border: #2a4a4a;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active {
+  background: #45a9c1;
+}
