@@ -42,6 +42,12 @@ public class MainController {
         return rezervareDao.getAllBookingsWithID(id);
     }
 
+    @RequestMapping("/istoric_sali")
+    public List<Rezervare> getRoomHistory() {
+        rezervareDao.updateSalaStatus();
+        return rezervareDao.getAll();
+    }
+
     @PostMapping("/new_booking")
     public void makeBooking(@RequestParam int id_sala, @RequestParam int id_user, @RequestParam String start, @RequestParam String finish, String motiv) {
         Rezervare rezervare = new Rezervare(id_sala, id_user, Timestamp.valueOf(start), Timestamp.valueOf(finish), motiv);
