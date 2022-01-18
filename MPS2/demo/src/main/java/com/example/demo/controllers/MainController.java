@@ -4,13 +4,14 @@ import com.example.demo.dao.RezervareDao;
 import com.example.demo.dao.SalaDao;
 import com.example.demo.dao.UserDao;
 import com.example.demo.models.Rezervare;
+import com.example.demo.models.Rezervare_full;
 import com.example.demo.models.Sala;
 import com.example.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.*;
 
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -46,6 +47,20 @@ public class MainController {
     public List<Rezervare> getRoomHistory(@RequestParam int id) {
         rezervareDao.updateSalaStatus();
         return rezervareDao.getAllBookingsWithID(id);
+    }
+
+    @RequestMapping("/istoric_sali")
+    public List<Rezervare_full> getRoomHistory() {
+        rezervareDao.updateSalaStatus();
+        List<Rezervare> temp = rezervareDao.getAll();
+        System.out.println(rezervareDao.getAll().get(0));
+        List <Rezervare_full> fin = new ArrayList<>();
+        for (Rezervare rezervare : temp) {
+            Sala s = salaDao.getById(rezervare.getId_sala());
+            Rezervare_full rf = new Rezervare_full(rezervare, s);
+            fin.add(rf);
+        }
+        return fin;
     }
 
     @PostMapping("/new_booking")

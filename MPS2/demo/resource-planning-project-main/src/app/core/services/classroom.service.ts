@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Classroom} from '../models/classroom.model';
 import {Booking} from '../models/booking.model';
+import {History} from '../models/history.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,11 @@ export class ClassroomService {
   public getClassrooms(): Observable<Classroom[]> {
     const url = 'http://localhost:8080/sali';
     return this.http.get<Classroom[]>(url);
+  }
+
+  public getHistory(): Observable<History[]> {
+    const url = 'http://localhost:8080/istoric_sali';
+    return this.http.get<History[]>(url);
   }
 
   public getClassroomHistory(id): Observable<Booking[]> {

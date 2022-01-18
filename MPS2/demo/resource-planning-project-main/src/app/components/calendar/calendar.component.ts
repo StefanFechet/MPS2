@@ -79,20 +79,31 @@ export class CalendarComponent implements OnInit {
   }
 
   private setData(): void {
-    this.classroomService.getClassrooms().subscribe(async data => {
-      data.forEach(classroom => {
-        this.classroomService.getClassroomHistory(classroom.id).subscribe(async data => {
-          data.forEach(historyData => {
-            historyData.start = new Date(historyData.start);
-            historyData.title = classroom.nume + ' - ' + historyData.motiv;
-            historyData.end = new Date(historyData.finish);
-            if (historyData.end > new Date()) {
-              historyData.color = colors.red;
-            } else {
-              historyData.color = colors.yellow;
-            }
-            this.events.push(historyData);
-          });
+    // this.classroomService.getClassrooms().subscribe(async data => {
+    //   data.forEach(classroom => {
+    //     this.classroomService.getClassroomHistory(classroom.id).subscribe(async data => {
+    //       data.forEach(historyData => {
+    //         historyData.start = new Date(historyData.start);
+    //         historyData.title = classroom.nume + ' - ' + historyData.motiv;
+    //         historyData.end = new Date(historyData.finish);
+    //         if (historyData.end > new Date()) {
+    //           historyData.color = colors.red;
+    //         } else {
+    //           historyData.color = colors.yellow;
+    //         }
+    //         this.events.push(historyData);
+    //       });
+    //     });
+    //   });
+    // });
+    this.classroomService.getHistory().subscribe(data => {
+      console.log(data);
+      data.forEach(item => {
+        this.events.push({
+          start: new Date(item['rezervare']['start']),
+          end: new Date(item['rezervare']['finish']),
+          title: item['sala']['nume'] + ' ' + item['rezervare']['motiv'],
+          color: (new Date(item['rezervare']['finish']) > new Date()) ? colors.red : colors.yellow
         });
       });
     });
