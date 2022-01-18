@@ -1,0 +1,71 @@
+<div class="sidebar">
+  <img src="/assets/logo.png"/>
+  <div class="user-details">
+    <img *ngIf="currentUser.permisiune == 1" class="user-details-avatar" src="/assets/teacher.png"/>
+    <img *ngIf="currentUser.permisiune == 0" class="user-details-avatar" src="/assets/graduated.png"/>
+    <div class="user-details-name">
+      {{ currentUser.nume }} {{ currentUser.prenume }}
+    </div>
+    <!-- <div class="user-details-email">
+      {{ currentUser.mail }}
+    </div> -->
+    <div *ngIf="currentUser.permisiune == 1; else student" class="user-details-email">
+      profesor
+    </div>
+    <ng-template #student>
+      <div class="user-details-email">
+        student
+      </div>
+    </ng-template>
+  </div>
+  <div
+    (click)="goToDashboard()"
+    class="logout-btn mt-5"
+    *ngIf="tab == 'dashboard'"
+    style="font-weight: bold"
+  >
+    Dashboard
+  </div>
+    <div
+      (click)="goToDashboard()"
+      class="logout-btn mt-5"
+      *ngIf="tab != 'dashboard'"
+    >
+    Dashboard
+  </div>
+  <div
+    (click)="goToNotifications()"
+    class="logout-btn"
+    *ngIf="tab == 'notifications'"
+    style="font-weight: bold"
+  >
+    Notifications
+  </div>
+  <div
+    (click)="goToNotifications()"
+    class="logout-btn"
+    *ngIf="tab != 'notifications'"
+  >
+    Notifications
+  </div>
+  <div
+    (click)="goToCalendar()"
+    class="logout-btn"
+    *ngIf="tab == 'calendar'"
+    style="font-weight: bold"
+  >
+    Calendar
+  </div>
+  <div
+    (click)="goToCalendar()"
+    class="logout-btn"
+    *ngIf="tab != 'calendar'"
+  >
+    Calendar
+  </div>
+  <div
+    (click)="doLogout()"
+    class="logout-btn"
+  >
+    Logout
+  </div>

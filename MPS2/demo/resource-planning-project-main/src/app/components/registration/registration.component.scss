@@ -4,14 +4,14 @@
   justify-content: flex-end;
 }
 
-.form-signin {
+.form-signup {
   width: 80%;
   max-width: 400px;
   margin-right: 15%;
 }
 
-.login-img {
-  width: 70%;
+.register-img {
+  width: 90%;
   max-width: 800px;
   height: auto;
   @media (max-width: 1200px) {
@@ -37,4 +37,33 @@
 
 .mat-form-field {
   width: 100%;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  background: none !important;
+  padding-left: 0 !important;
+  padding-right: 0.25em !important;
+}
+
+.text-container {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#register {
+  background: #2a4a4a;
+  color: white;
+}
+
+#register:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.logo {
+  position: absolute;
+  left: 0;
+  top: 0;
 }

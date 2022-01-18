@@ -1,21 +1,40 @@
 <div class="container-fluid">
   <div class="row" style="height: 90vh;">
     <div class="col-6" style="display: flex; align-items: center;">
+      <img class="logo" src="/assets/logo.png"/>
       <div class="auth-wrapper">
-        <form [formGroup]="signinForm" class="form-signin">
+        <form [formGroup]="signupForm" class="form-signup">
           <div class="welcome-text">
 
             <div matBadge="15" matBadgeColor="warn" class="welcome-text-title">
-              Welcome back,
-              <br>
-              please login to your existing account.
+              Register a new account
             </div>
           </div>
+
+          <mat-form-field>
+            <mat-label>Nume</mat-label>
+            <input formControlName="last_name" matInput placeholder="Enter last name">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Prenume</mat-label>
+            <input formControlName="first_name" matInput placeholder="Enter first name">
+          </mat-form-field>
+
           <mat-form-field>
             <mat-label>E-mail</mat-label>
             <input formControlName="email" matInput placeholder="Enter e-mail">
           </mat-form-field>
           <br>
+
+          <mat-form-field appearance="fill" class="role_dropdown">
+            <mat-label>Role</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option *ngFor="let role of roles" [value]="role.value">
+                {{role.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
           <mat-form-field>
             <mat-label>Password</mat-label>
@@ -25,17 +44,33 @@
               <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
           </mat-form-field>
+<!--          <div *ngIf="signupForm.value.password.errors?.['minlength']">-->
+<!--            Name must be at least 4 characters long.-->
+<!--          </div>-->
 
-          <button (click)="loginUser()" [disabled]="signinForm.status == 'INVALID'"
-                  class="btn btn-block btn-light" type="submit">Sign in
+          <mat-form-field>
+            <mat-label>Confirm password</mat-label>
+            <input [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirm_password" matInput
+                   placeholder="Re-enter password">
+            <button (click)="hideConfirmPassword = !hideConfirmPassword" mat-icon-button matSuffix>
+              <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <button (click)="registerUser()" [disabled]="signupForm.status == 'INVALID'" id="register"
+                  class="btn btn-block btn-light" type="submit">Register
           </button>
+          <div class="text-container">
+            <span>Already have an account?&nbsp;</span>
+            <a [routerLink]="'/'" class="btn btn-link">Login</a>
+          </div>
         </form>
 
       </div>
     </div>
     <div class="col-6" style="display: flex; align-items: center;">
       <div>
-        <img class=" login-img" src="/assets/login-img.svg">
+        <img class="register-img" src="/assets/register1.png">
       </div>
     </div>
   </div>

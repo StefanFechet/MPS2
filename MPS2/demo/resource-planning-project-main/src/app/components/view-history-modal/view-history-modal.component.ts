@@ -13,7 +13,7 @@ declare const $: any;
 export class ViewHistoryModalComponent implements OnInit {
   @Input() events: Observable<any>;
   public classroomName;
-  public tableData = []
+  public tableData = [];
   public users;
   private eventsSubscription: Subscription = new Subscription();
 
@@ -40,18 +40,18 @@ export class ViewHistoryModalComponent implements OnInit {
       data.forEach(historyData => {
         historyData.start = new Date(historyData.start);
         historyData.finish = new Date(historyData.finish);
-        var differenceTravel = historyData.finish.getTime() - historyData.start.getTime();
+        let differenceTravel = historyData.finish.getTime() - historyData.start.getTime();
 
         historyData.estimat_rezervare = ((differenceTravel) / 1000) / 60;
 
         this.users.forEach(user => {
-          if (user.id == historyData.id_user) {
+          if (user.id === historyData.id_user) {
             historyData.userName = user.nume + ' ' + user.prenume;
           }
-        })
+        });
         this.tableData.push(historyData);
-      })
-    })
+      });
+    });
   }
 
   public showModal(): void {

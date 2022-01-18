@@ -5,21 +5,23 @@ import {ClassroomService} from 'src/app/core/services/classroom.service';
 import {SnackbarService} from 'src/app/core/services/snackbar.service';
 import {faCalendarAlt, faHistory} from '@fortawesome/free-solid-svg-icons';
 import {Subject} from 'rxjs';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DashboardComponent implements OnInit {
 
-  public currentUser;
   public faHistory = faHistory;
   public faCalendarAlt = faCalendarAlt;
   public openHistoryModalSubject: Subject<any> = new Subject<any>();
   public openBookingModalSubject: Subject<any> = new Subject<any>();
-
-  public tableData = []
+  public tab = 'dashboard';
+  public tableData = [];
+  public currentUser;
 
   constructor(
     public router: Router,
@@ -42,18 +44,12 @@ export class DashboardComponent implements OnInit {
     this.openBookingModalSubject.next({classroomName, id});
   }
 
-  public doLogout(): void {
-    this.authService.logOut();
-    this.router.navigate(['']);
-    this.snackBar.openSnackBar('Successfully logged out!', 'success-snackbar');
-  }
-
   private setData(): void {
     this.classroomService.getClassrooms().subscribe(data => {
       data.forEach(classroom => {
         this.tableData.push(classroom);
-      })
-    })
+      });
+    });
   }
 
 }

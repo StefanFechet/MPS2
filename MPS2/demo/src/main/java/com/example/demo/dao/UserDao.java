@@ -26,6 +26,17 @@ public class UserDao {
                 .getSingleResult();
     }
 
+    @Transactional
+    public void registerUser(User user) {
+     entityManager.createNativeQuery("INSERT INTO User (nume, prenume, permisiune, mail, parola) VALUES (?,?,?,?,?)")
+                .setParameter(1, user.getNume())
+                .setParameter(2, user.getPrenume())
+                .setParameter(3, user.getPermisiune())
+                .setParameter(4, user.getMail())
+                .setParameter(5, user.getParola())
+                .executeUpdate();
+    }
+
     public User getById(int id) {
         return entityManager.find(User.class, id);
     }
