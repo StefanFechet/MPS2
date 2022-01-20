@@ -1,0 +1,14 @@
+@import '../sidemenu/sidemenu.component';
+
+.dashboard {
+  height: 100vh;
+  width: calc(100% - 250px);
+  padding: 35px;
+  margin-left: 250px;
+}
+
+.addClassroom {
+  background: #036881;
+  float: right;
+}
+

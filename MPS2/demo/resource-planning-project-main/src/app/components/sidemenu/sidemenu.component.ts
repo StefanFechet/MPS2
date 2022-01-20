@@ -1,8 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
-import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {SnackbarService} from '../../core/services/snackbar.service';
 import {AuthService} from '../../core/services/auth.service';
+import {NotificationsService} from '../../core/services/notifications.service';
 
 @Component({
   selector: 'app-sidemenu',
@@ -10,33 +10,35 @@ import {AuthService} from '../../core/services/auth.service';
   styleUrls: ['./sidemenu.component.scss']
 })
 export class SidemenuComponent implements OnInit, OnChanges {
-
-  @Input() tab: string;
-  public currentUser;
-  public openHistoryModalSubject: Subject<any> = new Subject<any>();
-  public openBookingModalSubject: Subject<any> = new Subject<any>();
-
-  ngOnChanges(changes: SimpleChanges) {
-    const tab: SimpleChange = changes.tab;
-  }
-
   constructor(
     public router: Router,
     private snackBar: SnackbarService,
     private authService: AuthService,
+    private notificationService: NotificationsService
   ) {
+  }
+
+  @Input() tab: string;
+  public currentUser;
+  notificationTable = [];
+  nrUnreadNotifications: number;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const tab: SimpleChange = changes.tab;
   }
 
   ngOnInit(): void {
     this.currentUser = this.authService.getUser();
+    this.getNotifications();
   }
 
-  public openHistoryModal(classroomName, id): void {
-    this.openHistoryModalSubject.next({classroomName, id});
-  }
-
-  public openBookingModal(classroomName, id): void {
-    this.openBookingModalSubject.next({classroomName, id});
+  getNotifications(): void {
+    this.notificationService.getNotificationsById(this.currentUser.id).subscribe(data => {
+      this.notificationTable = data;
+      const unreadNotifications = this.notificationTable.filter((notification:
+                                                                   { citit: boolean; }) => notification.citit === false);
+      this.nrUnreadNotifications = unreadNotifications.length;
+    });
   }
 
   public doLogout(): void {
@@ -46,7 +48,11 @@ export class SidemenuComponent implements OnInit, OnChanges {
   }
 
   public goToDashboard(): void {
-    this.router.navigate(['/dashboard']);
+    if (this.currentUser.nume.includes('admin')) {
+      this.router.navigate(['/admin']);
+    } else {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   public goToCalendar(): void {

@@ -1,0 +1,58 @@
+<div
+  class="modal fade"
+  data-backdrop="true"
+  id="addClassroomModal"
+  role="dialog"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="row">
+        <div class="d-flex justify-content-between col-12">
+          <div class="modal-title">
+            <span> Adaugă o sală nouă </span>
+          </div>
+          <button
+            (click)="hideModal()"
+            aria-label="Close"
+            class="btn close"
+            data-dismiss="modal"
+            type="button"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form [formGroup]="form" class="w-100">
+          <div class="row">
+            <mat-form-field>
+              <mat-label>Nume sală</mat-label>
+              <input formControlName="classroom_name" matInput placeholder="Enter classroom name">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Facultate</mat-label>
+              <input formControlName="faculty" matInput placeholder="Enter faculty">
+            </mat-form-field>
+              <mat-form-field>
+                <mat-label>Descriere</mat-label>
+                <textarea
+                  formControlName="description"
+                  matInput
+                  placeholder="Description"
+                  required
+                ></textarea>
+              </mat-form-field>
+          </div>
+          <div>
+            <button
+              (click)="addClassroom()"
+              [disabled]="form.status == 'INVALID'"
+              class="btn btn-success float-right"
+            >
+              Adaugă
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

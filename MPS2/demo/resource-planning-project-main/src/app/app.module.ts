@@ -17,6 +17,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatBadgeModule} from '@angular/material/badge';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -29,6 +30,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { AddNewClassroomComponent } from './components/add-new-classroom/add-new-classroom.component';
+import { ClassroomTableComponent } from './components/classroom-table/classroom-table.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,10 @@ import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
     RegistrationComponent,
     CalendarComponent,
     NotificationsComponent,
-    SidemenuComponent
+    SidemenuComponent,
+    AdminDashboardComponent,
+    AddNewClassroomComponent,
+    ClassroomTableComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +71,8 @@ import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-    MatDividerModule
+    MatDividerModule,
+    MatBadgeModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {AuthService} from 'src/app/core/services/auth.service';
 import {ClassroomService} from 'src/app/core/services/classroom.service';
@@ -10,7 +10,7 @@ declare const $: any;
   templateUrl: './view-history-modal.component.html',
   styleUrls: ['./view-history-modal.component.scss']
 })
-export class ViewHistoryModalComponent implements OnInit {
+export class ViewHistoryModalComponent implements OnInit, OnDestroy {
   @Input() events: Observable<any>;
   public classroomName;
   public tableData = [];

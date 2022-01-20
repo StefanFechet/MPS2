@@ -1,0 +1,20 @@
+<head>
+  <script crossorigin="anonymous" src="https://kit.fontawesome.com/18450ed4eb.js"></script>
+</head>
+<div class="d-flex">
+  <app-sidemenu [tab]="tab"></app-sidemenu>
+  <div class="dashboard">
+    <h3>Dashboard</h3>
+    <mat-divider></mat-divider>
+
+    <app-classroom-table></app-classroom-table>
+    <div class="example-button-container">
+      <button mat-fab class="addClassroom" (click)="openAddingClassroomModal()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<app-add-new-classroom [events]="openAddingClassroomModalSubject.asObservable()"></app-add-new-classroom>

@@ -20,3 +20,8 @@ body {
   background: rgb(0, 170, 0) !important;
   color: white !important;
 }
+
+.btn:disabled {
+  cursor: not-allowed !important;
+  pointer-events: auto !important;
+}

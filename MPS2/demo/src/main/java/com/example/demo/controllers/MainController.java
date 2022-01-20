@@ -87,8 +87,8 @@ public class MainController {
         return abonareDao.getAllAbonatiSala(id);
     }
 
-    @PostMapping("/new_abonare")
-    public void makeAbonare(@RequestParam int id_sala, @RequestParam int id_user) {
+    @PostMapping("/abonare_noua")
+    public void makeAbonares(@RequestParam int id_sala, @RequestParam int id_user) {
         abonareDao.makeAbonare(id_sala, id_user);
     }
 
@@ -100,6 +100,11 @@ public class MainController {
     @DeleteMapping("/delete_abonare")
     public void deleteAbonare(@RequestParam int id_sala, @RequestParam int id_user){
         abonareDao.deleteAbonare(id_sala, id_user);
+    }
+
+    @DeleteMapping("/delete_abonari_sala")
+    public void deleteAbonareByClassroomId(@RequestParam int id_sala){
+        abonareDao.deleteAbonare(id_sala);
     }
 
 

@@ -6,6 +6,8 @@ import {AuthGuard} from './core/guards/auth.guard';
 import {RegistrationComponent} from './components/registration/registration.component';
 import {CalendarComponent} from './components/calendar/calendar.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
+import {AdminDashboardComponent} from './components/admin-dashboard/admin-dashboard.component';
+import {AdminGuard} from "./core/guards/admin.guard";
 
 const routes: Routes = [
   {
@@ -30,6 +32,11 @@ const routes: Routes = [
     path: 'notifications',
     component: NotificationsComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin',
+    component: AdminDashboardComponent,
+    canActivate: [AdminGuard]
   }
 ];
 

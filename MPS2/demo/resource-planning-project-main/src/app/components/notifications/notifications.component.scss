@@ -15,7 +15,26 @@
   border-radius: 5px;
   padding: 2vh;
   margin-top: 3vh;
-  font-size: 2vh;
+  font-size: 18px;
 
+}
+
+.card_list {
+  list-style-type: none;
+  display: inline;
+}
+
+.read_notification, .delete_notification {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: white;
+  float: right;
+  background: transparent;
+  margin-right: 1vh;
+}
+
+.no_notification {
+  margin-top: 3vh;
 }
 

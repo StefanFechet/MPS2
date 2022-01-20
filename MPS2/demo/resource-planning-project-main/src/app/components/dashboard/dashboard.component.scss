@@ -1,13 +1,10 @@
 @import '../sidemenu/sidemenu.component';
+@import '../classroom-table/classroom-table.component';
 
 .dashboard {
   height: 100vh;
   width: calc(100% - 250px);
   padding: 35px;
   margin-left: 250px;
-}
-
-.table-icon {
-  cursor: pointer;
 }
 

@@ -43,11 +43,12 @@ public class NotificareDao {
                     entityManager.createNativeQuery("INSERT INTO Notificare (id_sala, id_user, mesaj, data_notificare, citit) VALUES (?,?,?,?,?)")
                             .setParameter(1, r.getId_sala())
                             .setParameter(2, ab.getId_user())
-                            .setParameter(3, "Sala "+ salaDao.getById(r.getId_sala()).nume + " din facultatea " + salaDao.getById(r.getId_sala()).facultate + " a fost eliberata")
+                            .setParameter(3, "Sala "+ salaDao.getById(r.getId_sala()).nume + " din facultatea " + salaDao.getById(r.getId_sala()).facultate + " a fost eliberată.")
                             .setParameter(4, new Timestamp(System.currentTimeMillis()))
                             .setParameter(5, false)
                             .executeUpdate();
                 }
+                abonareDao.deleteAbonareByClassroomId(r.getId_sala());
             }
         }
     }

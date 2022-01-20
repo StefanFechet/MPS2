@@ -62,47 +62,24 @@ export class CalendarComponent implements OnInit {
   refresh = new Subject<void>();
   events: CalendarEvent[] = [];
   events1 = [];
-  activeDayIsOpen = true;
+  activeDayIsOpen = false;
   @ViewChild('divClick') divClick: ElementRef;
   ngOnInit(): void {
     this.currentUser = this.authService.getUser();
     this.authService.getUsers().subscribe(data => {
       this.users = data;
     });
-    // setTimeout(() => {
-    //   this.divClick.nativeElement.click();
-    // }, 200);
-    // const element: HTMLElement = document.getElementById('divClick') as HTMLElement;
-    // element.click();
     console.log(this.events);
     console.log(this.events.length);
   }
 
   private setData(): void {
-    // this.classroomService.getClassrooms().subscribe(async data => {
-    //   data.forEach(classroom => {
-    //     this.classroomService.getClassroomHistory(classroom.id).subscribe(async data => {
-    //       data.forEach(historyData => {
-    //         historyData.start = new Date(historyData.start);
-    //         historyData.title = classroom.nume + ' - ' + historyData.motiv;
-    //         historyData.end = new Date(historyData.finish);
-    //         if (historyData.end > new Date()) {
-    //           historyData.color = colors.red;
-    //         } else {
-    //           historyData.color = colors.yellow;
-    //         }
-    //         this.events.push(historyData);
-    //       });
-    //     });
-    //   });
-    // });
     this.classroomService.getHistory().subscribe(data => {
-      console.log(data);
       data.forEach(item => {
         this.events.push({
           start: new Date(item['rezervare']['start']),
           end: new Date(item['rezervare']['finish']),
-          title: item['sala']['nume'] + ' ' + item['rezervare']['motiv'],
+          title: item['sala']['nume'] + ' - ' + item['rezervare']['motiv'],
           color: (new Date(item['rezervare']['finish']) > new Date()) ? colors.red : colors.yellow
         });
       });
@@ -115,20 +92,22 @@ export class CalendarComponent implements OnInit {
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
         events.length === 0
       ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
+        this.activeDayIsOpen = !this.activeDayIsOpen;
       }
       this.viewDate = date;
     }
   }
 
-  setView(view: CalendarView) {
+    setView(view: CalendarView): void {
     this.view = view;
   }
 
-  closeOpenMonthViewDay() {
+    closeOpenMonthViewDay(): void {
     this.activeDayIsOpen = false;
+  }
+
+    showBookings(): void {
+    this.activeDayIsOpen = true;
   }
 
 }

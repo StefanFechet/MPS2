@@ -6,8 +6,21 @@
   <div class="dashboard">
     <h3>Notifications</h3>
     <mat-divider></mat-divider>
-    <div class="notification_card">
-      <span>Sala este disponibila</span>
+    <h5 class="no_notification" *ngIf="!(notificationTable.length > 0)">Nu există notificări!</h5>
+    <div class="list">
+      <ul class="card_list">
+        <li class=element_list *ngFor="let info of notificationTable">
+          <div class="notification_card" [ngStyle]="{'opacity':info.citit == true ? '0.7' : '1'}">
+            <span>{{notificationTable[0].mesaj}}</span>
+            <button class="delete_notification" (click)="deleteNotification(info.id)">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+            <button *ngIf="info.citit == false" class="read_notification" (click)="markRead(info.id)">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </button>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

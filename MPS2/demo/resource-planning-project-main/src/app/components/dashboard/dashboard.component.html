@@ -6,57 +6,6 @@
   <div class="dashboard">
     <h3>Dashboard</h3>
     <mat-divider></mat-divider>
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th scope="col">Nume</th>
-        <th scope="col">Facultate</th>
-        <th scope="col">Descriere</th>
-        <th scope="col">Stare</th>
-        <th scope="col"></th>
-      </tr>
-      </thead>
-      <tbody *ngFor="let row of tableData">
-      <tr>
-        <td>
-          {{ row.nume }}
-        </td>
-        <td>
-          {{ row.facultate }}
-        </td>
-        <td>
-          {{ row.descriere }}
-        </td>
-        <td *ngIf="!row.stare">
-          Libera
-        </td>
-        <td *ngIf="row.stare">
-          Ocupata
-        </td>
-        <td class="d-flex justify-content-around">
-          <button
-            (click)="openHistoryModal(row.nume, row.id)"
-            class="btn btn-sm table-icon"
-            matTooltip="Istoric"
-          >
-            <fa-icon [icon]="faHistory"></fa-icon>
-          </button>
-          <div matTooltip="Rezerva">
-            <button
-              (click)="openBookingModal(row.nume, row.id)"
-              [disabled]="currentUser.permisiune != 1"
-              class="btn btn-sm table-icon"
-            >
-              <fa-icon [icon]="faCalendarAlt"></fa-icon>
-            </button>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    <app-classroom-table></app-classroom-table>
   </div>
 </div>
-
-
-<app-view-history-modal [events]="openHistoryModalSubject.asObservable()"></app-view-history-modal>
-<app-book-classroom-modal [events]="openBookingModalSubject.asObservable()"></app-book-classroom-modal>

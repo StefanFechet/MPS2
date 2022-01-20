@@ -56,7 +56,11 @@ export class AuthenticationComponent implements OnInit {
 
     if (userExists) {
       this.authService.signIn(currentUser);
-      this.router.navigate(['dashboard']);
+      if (this.signinForm.value.email.includes('admin')) {
+        this.router.navigate(['admin']);
+      } else {
+        this.router.navigate(['dashboard']);
+      }
       this.snackBar.openSnackBar('Successfully logged in!', 'success-snackbar');
     } else {
       this.snackBar.openSnackBar('User doesn\'t exist.', 'error-snackbar');

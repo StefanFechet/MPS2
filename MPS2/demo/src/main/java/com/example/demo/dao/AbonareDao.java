@@ -51,4 +51,10 @@ public class AbonareDao {
                 .executeUpdate();
     }
 
+    public void deleteAbonareByClassroomId(int id_sala) {
+        entityManager.createQuery("delete FROM Abonare where id_sala = :id_sala")
+                .setParameter("id_sala", id_sala)
+                .executeUpdate();
+    }
+
 }

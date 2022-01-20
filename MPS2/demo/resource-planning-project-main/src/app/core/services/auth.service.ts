@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {User} from '../models/user.model';
+import {baseUrl} from '../../../global';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,18 @@ export class AuthService {
   }
 
   public getUsers(): Observable<User[]> {
-    const url = 'http://localhost:8080/login/';
+    const url = baseUrl + '/login/';
     return this.http.get<User[]>(url);
   }
 
-  public registerUser(nume, prenume, permisiune, mail, parola): Observable<any> {
-    const url = 'http://localhost:8080/register';
-    const params = new HttpParams().set('nume', nume).set('prenume', prenume).set('permisiune', permisiune).set('mail', mail).set('parola', parola);
+  public registerUser(nume: string, prenume: string, permisiune: number, mail: string, parola: string): Observable<any> {
+    const url = baseUrl + '/register';
+    const params = new HttpParams()
+      .set('nume', nume)
+      .set('prenume', prenume)
+      .set('permisiune', permisiune)
+      .set('mail', mail)
+      .set('parola', parola);
     return this.http.post<any>(url, {}, {params});
   }
 
@@ -30,9 +36,9 @@ export class AuthService {
     localStorage.removeItem('appData');
   }
 
-  public addDataToLocalStorage(user: any, access_token?: any): void {
+  public addDataToLocalStorage(user: any, accessToken?: any): void {
     const appData = {
-      access_token,
+      accessToken,
       user,
     };
     localStorage.setItem('appData', JSON.stringify(appData));
@@ -40,6 +46,11 @@ export class AuthService {
 
   public isLoggedIn(): boolean {
     return JSON.parse(localStorage.getItem('appData')) !== null;
+  }
+
+  public isAdmin(): boolean {
+    console.log(JSON.parse(localStorage.getItem('appData')).nume);
+    return JSON.parse(localStorage.getItem('appData')).user.nume === 'admin';
   }
 
   public getToken(): string {

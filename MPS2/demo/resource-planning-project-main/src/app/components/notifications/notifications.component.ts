@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {SnackbarService} from '../../core/services/snackbar.service';
 import {AuthService} from '../../core/services/auth.service';
-import {ClassroomService} from '../../core/services/classroom.service';
+import {NotificationsService} from '../../core/services/notifications.service';
 
 
 @Component({
@@ -14,15 +14,41 @@ import {ClassroomService} from '../../core/services/classroom.service';
 export class NotificationsComponent implements OnInit {
 
   public tab = 'notifications';
+  currentUser;
+  notificationTable = [];
+  nrUnreadNotifications: number;
   constructor(
     public router: Router,
     private snackBar: SnackbarService,
     private authService: AuthService,
-    private classroomService: ClassroomService
+    private notificationService: NotificationsService
   ) {
   }
 
   ngOnInit(): void {
+    this.currentUser = this.authService.getUser();
+    this.getNotifications();
+  }
+
+  getNotifications(): void {
+    this.notificationService.getNotificationsById(this.currentUser.id).subscribe(data => {
+      this.notificationTable = data;
+      const unreadNotifications = this.notificationTable.filter((notification:
+                                                           { citit: boolean; }) => notification.citit === false);
+      this.nrUnreadNotifications = unreadNotifications.length;
+    });
+  }
+
+  markRead(id: string): void {
+    this.notificationService.markReadNotification(id).subscribe(() => {
+      this.getNotifications();
+    });
+  }
+
+  deleteNotification(id: string): void {
+    this.notificationService.deleteNotification(id).subscribe(() => {
+      this.getNotifications();
+    });
   }
 
 }
