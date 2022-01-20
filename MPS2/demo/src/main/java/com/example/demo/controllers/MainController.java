@@ -1,12 +1,7 @@
 package com.example.demo.controllers;
 
-import com.example.demo.dao.RezervareDao;
-import com.example.demo.dao.SalaDao;
-import com.example.demo.dao.UserDao;
-import com.example.demo.models.Rezervare;
-import com.example.demo.models.Rezervare_full;
-import com.example.demo.models.Sala;
-import com.example.demo.models.User;
+import com.example.demo.dao.*;
+import com.example.demo.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +19,10 @@ public class MainController {
     private UserDao userDao;
     @Autowired
     private RezervareDao rezervareDao;
+    @Autowired
+    private AbonareDao abonareDao;
+    @Autowired
+    private NotificareDao notificareDao;
 
     @GetMapping("/login")
     public List<User> getAllUsers() {
@@ -41,6 +40,11 @@ public class MainController {
     public List<Sala> getAllRooms() {
         rezervareDao.updateSalaStatus();
         return salaDao.getAll();
+    }
+
+    @PostMapping("/new_sala")
+    public void createSala(String nume, String facultate, String descriere){
+        salaDao.createSala(nume, facultate, descriere);
     }
 
     @RequestMapping("/istoric")
@@ -70,4 +74,66 @@ public class MainController {
         rezervareDao.makeBooking(rezervare);
         rezervareDao.updateSalaStatus();
     }
+
+
+    //ABONARE
+    @RequestMapping("/abonari_sala")
+    public List<Abonare> getAllAbonari(@RequestParam int id) {
+        return abonareDao.getAllAbonariSala(id);
+    }
+
+    @RequestMapping("/abonati_sala")
+    public List<User> getAllAbonati(@RequestParam int id) {
+        return abonareDao.getAllAbonatiSala(id);
+    }
+
+    @PostMapping("/new_abonare")
+    public void makeAbonare(@RequestParam int id_sala, @RequestParam int id_user) {
+        abonareDao.makeAbonare(id_sala, id_user);
+    }
+
+    @DeleteMapping("/delete_abonare_by_id")
+    public void deleteAbonare(@RequestParam int id_abonare){
+        abonareDao.deleteAbonare(id_abonare);
+    }
+
+    @DeleteMapping("/delete_abonare")
+    public void deleteAbonare(@RequestParam int id_sala, @RequestParam int id_user){
+        abonareDao.deleteAbonare(id_sala, id_user);
+    }
+
+
+    //NOTIFICARE
+    @RequestMapping("/notificari_user")
+    public List<Notificare> getAllNotificariUser(@RequestParam int id_user) {
+        return notificareDao.getAllNotificariUser(id_user);
+    }
+
+    @PutMapping("/mark_read_notification")
+    public void markRead(@RequestParam int id){
+        notificareDao.markRead(id);
+    }
+
+    @PutMapping("/mark_read_user")
+    public void markReadUser(@RequestParam int id){
+        notificareDao.markReadUser(id);
+    }
+
+    @DeleteMapping("/delete_notification")
+    public void deleteNotification(@RequestParam int id){
+        notificareDao.deleteNotification(id);
+    }
+
+    @DeleteMapping("/delete_notifications_user")
+    public void deleteNotificationsUser(@RequestParam int id){
+        notificareDao.deleteNotificationsUser(id);
+    }
+
+
+
+    /*
+    @PostMapping("/test")
+    public void test(){
+        notificareDao.sendNotifications();
+    }*/
 }
