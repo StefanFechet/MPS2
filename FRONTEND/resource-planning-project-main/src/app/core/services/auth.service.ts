@@ -49,7 +49,6 @@ export class AuthService {
   }
 
   public isAdmin(): boolean {
-    console.log(JSON.parse(localStorage.getItem('appData')).nume);
     return JSON.parse(localStorage.getItem('appData')).user.nume === 'admin';
   }
 

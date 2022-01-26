@@ -1,7 +1,7 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  OnInit, ElementRef, ViewChild
+  OnInit
 } from '@angular/core';
 import {
   isSameDay,
@@ -16,6 +16,7 @@ import {Router} from '@angular/router';
 import {SnackbarService} from '../../core/services/snackbar.service';
 import {AuthService} from '../../core/services/auth.service';
 import {ClassroomService} from '../../core/services/classroom.service';
+import {NotificationsService} from '../../core/services/notifications.service';
 
 const colors: any = {
   red: {
@@ -45,15 +46,20 @@ export class CalendarComponent implements OnInit {
     private snackBar: SnackbarService,
     private authService: AuthService,
     private classroomService: ClassroomService,
+    private notificationService: NotificationsService
   ) {
+    this.currentUser = this.authService.getUser();
+    this.getNotifications();
     this.setData();
   }
 
   public currentUser;
   public tab = 'calendar';
+  public notificationsNumber = -1;
+  notificationTable = [];
+  nrUnreadNotifications: number;
   public tableData = [];
   public classroomData = [];
-  public users;
   public classroomName;
   view: CalendarView = CalendarView.Month;
 
@@ -63,14 +69,7 @@ export class CalendarComponent implements OnInit {
   events: CalendarEvent[] = [];
   events1 = [];
   activeDayIsOpen = false;
-  @ViewChild('divClick') divClick: ElementRef;
   ngOnInit(): void {
-    this.currentUser = this.authService.getUser();
-    this.authService.getUsers().subscribe(data => {
-      this.users = data;
-    });
-    console.log(this.events);
-    console.log(this.events.length);
   }
 
   private setData(): void {
@@ -108,8 +107,13 @@ export class CalendarComponent implements OnInit {
     this.activeDayIsOpen = false;
   }
 
-    showBookings(): void {
-    this.activeDayIsOpen = true;
+  getNotifications(): void {
+    this.notificationService.getNotificationsById(this.currentUser.id).subscribe(data => {
+      this.notificationTable = data;
+      const unreadNotifications = this.notificationTable.filter((notification:
+                                                                   { citit: boolean; }) => notification.citit === false);
+      this.nrUnreadNotifications = unreadNotifications.length;
+      this.notificationsNumber = this.nrUnreadNotifications;
+    });
   }
-
 }

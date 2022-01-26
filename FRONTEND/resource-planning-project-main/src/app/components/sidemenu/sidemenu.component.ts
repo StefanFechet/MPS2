@@ -19,12 +19,12 @@ export class SidemenuComponent implements OnInit, OnChanges {
   }
 
   @Input() tab: string;
+  @Input() notificationsNumber: number;
   public currentUser;
   notificationTable = [];
   nrUnreadNotifications: number;
 
   ngOnChanges(changes: SimpleChanges): void {
-    const tab: SimpleChange = changes.tab;
   }
 
   ngOnInit(): void {

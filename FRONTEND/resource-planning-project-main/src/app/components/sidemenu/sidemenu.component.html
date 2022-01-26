@@ -40,7 +40,7 @@
       *ngIf="tab == 'notifications'"
       style="font-weight: bold"
     >
-      <span *ngIf="nrUnreadNotifications > 0; else noNotify" matBadge={{nrUnreadNotifications}} matBadgeColor="warn" matBadgeSize="small">Notifications</span>
+      <span *ngIf="notificationsNumber > 0; else noNotify" matBadge={{notificationsNumber}} matBadgeColor="warn" matBadgeSize="small">Notifications</span>
       <ng-template #noNotify>
         <span>Notifications</span>
       </ng-template>
@@ -50,7 +50,7 @@
       class="logout-btn"
       *ngIf="tab != 'notifications'"
     >
-      <span *ngIf="nrUnreadNotifications > 0; else noNotify" matBadge={{nrUnreadNotifications}} matBadgeColor="warn" matBadgeSize="small">Notifications</span>
+      <span *ngIf="notificationsNumber > 0; else noNotify" matBadge={{notificationsNumber}} matBadgeColor="warn" matBadgeSize="small">Notifications</span>
       <ng-template #noNotify>
         <span>Notifications</span>
       </ng-template>

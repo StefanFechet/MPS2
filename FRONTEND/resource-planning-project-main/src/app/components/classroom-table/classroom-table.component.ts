@@ -46,6 +46,7 @@ export class ClassroomTableComponent implements OnInit {
 
   public abonareNotificari(classroomId, id): void {
     this.notificationsService.subscribeNotificari(parseInt(classroomId, 10), parseInt(id, 10)).subscribe();
+    this.snackBar.openSnackBar('Când sala va deveni disponibilă vei fi înștiințat printr-o notificare!', 'success-snackbar');
   }
 
   private setData(): void {

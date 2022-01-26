@@ -39,8 +39,8 @@ export class AddNewClassroomComponent implements OnInit, OnDestroy {
     });
   }
 
-  public addClassroom(): void {
-
+  public addClassroom(event: Event): void {
+    event.preventDefault();
     this.classroomService
       .addClassroom(
         this.form.value.classroom_name,
@@ -49,15 +49,7 @@ export class AddNewClassroomComponent implements OnInit, OnDestroy {
       )
       .subscribe();
     this.hideModal();
-    this.setData();
-  }
-
-  private setData(): void {
-    this.classroomService.getClassrooms().subscribe(data => {
-      data.forEach(classroom => {
-        this.tableData.push(classroom);
-      });
-    });
+    window.location.reload();
   }
 
   public showModal(): void {
@@ -71,7 +63,6 @@ export class AddNewClassroomComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.eventsSubscription.unsubscribe();
-    this.setData();
   }
 
 }

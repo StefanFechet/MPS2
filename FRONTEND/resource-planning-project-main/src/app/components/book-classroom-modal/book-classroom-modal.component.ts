@@ -46,7 +46,8 @@ export class BookClassroomModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  public bookClassroom(): void {
+  public bookClassroom(event: Event): void {
+    event.preventDefault();
     const latestDate = this.datepipe.transform(this.form.value.startDate, 'yyyy-MM-dd HH:mm:ss');
     const latestDate2 = this.datepipe.transform(this.form.value.endDate, 'yyyy-MM-dd HH:mm:ss');
 
@@ -58,10 +59,9 @@ export class BookClassroomModalComponent implements OnInit, OnDestroy {
         latestDate2,
         this.form.value.reason
       )
-      .subscribe((data) => {
-        console.log(data);
-      });
+      .subscribe();
     this.hideModal();
+    window.location.reload();
   }
 
   public showModal(): void {

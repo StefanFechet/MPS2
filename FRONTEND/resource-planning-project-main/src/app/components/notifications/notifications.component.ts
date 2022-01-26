@@ -14,6 +14,7 @@ import {NotificationsService} from '../../core/services/notifications.service';
 export class NotificationsComponent implements OnInit {
 
   public tab = 'notifications';
+  public notificationsNumber = -1;
   currentUser;
   notificationTable = [];
   nrUnreadNotifications: number;
@@ -36,6 +37,7 @@ export class NotificationsComponent implements OnInit {
       const unreadNotifications = this.notificationTable.filter((notification:
                                                            { citit: boolean; }) => notification.citit === false);
       this.nrUnreadNotifications = unreadNotifications.length;
+      this.notificationsNumber = this.nrUnreadNotifications;
     });
   }
 
@@ -43,12 +45,14 @@ export class NotificationsComponent implements OnInit {
     this.notificationService.markReadNotification(id).subscribe(() => {
       this.getNotifications();
     });
+    window.location.reload();
   }
 
   deleteNotification(id: string): void {
     this.notificationService.deleteNotification(id).subscribe(() => {
       this.getNotifications();
     });
+    window.location.reload();
   }
 
 }

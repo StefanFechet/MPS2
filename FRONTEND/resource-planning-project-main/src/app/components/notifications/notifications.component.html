@@ -2,7 +2,7 @@
   <script crossorigin="anonymous" src="https://kit.fontawesome.com/18450ed4eb.js"></script>
 </head>
 <div class="d-flex">
-  <app-sidemenu [tab]="tab"></app-sidemenu>
+  <app-sidemenu [tab]="tab" [notificationsNumber]="notificationsNumber"></app-sidemenu>
   <div class="dashboard">
     <h3>Notifications</h3>
     <mat-divider></mat-divider>
@@ -11,11 +11,11 @@
       <ul class="card_list">
         <li class=element_list *ngFor="let info of notificationTable">
           <div class="notification_card" [ngStyle]="{'opacity':info.citit == true ? '0.7' : '1'}">
-            <span>{{notificationTable[0].mesaj}}</span>
-            <button class="delete_notification" (click)="deleteNotification(info.id)">
+            <span>{{info.mesaj}}</span>
+            <button class="delete_notification" type="button" (click)="deleteNotification(info.id)">
               <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
-            <button *ngIf="info.citit == false" class="read_notification" (click)="markRead(info.id)">
+            <button *ngIf="info.citit == false" type="button" class="read_notification" (click)="markRead(info.id)">
               <i class="fa fa-check" aria-hidden="true"></i>
             </button>
           </div>

@@ -54,7 +54,8 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
-  public registerUser(): void {
+  public registerUser(event: Event): void {
+    event.preventDefault();
     let userExists = false;
     if (
         this.signupForm.value.email !== null &&
@@ -75,9 +76,7 @@ export class RegistrationComponent implements OnInit {
             this.snackBar.openSnackBar('An account with the given email already exists', 'error-snackbar');
           } else {
             this.authService.registerUser(this.signupForm.value.last_name, this.signupForm.value.first_name,
-              this.selected, this.signupForm.value.email, this.signupForm.value.password).subscribe((data) => {
-              console.log(data);
-            });
+              this.selected, this.signupForm.value.email, this.signupForm.value.password).subscribe();
             this.router.navigate(['']);
             this.snackBar.openSnackBar('Successfully register!', 'success-snackbar');
           }

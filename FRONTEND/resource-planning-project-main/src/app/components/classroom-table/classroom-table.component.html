@@ -28,6 +28,7 @@
     <td class="d-flex justify-content-around">
       <button
         (click)="openHistoryModal(row.nume, row.id)"
+        type="button"
         class="btn btn-sm table-icon"
         matTooltip="Istoric"
       >
@@ -36,6 +37,7 @@
       <div matTooltip="Rezervă" *ngIf="!row.stare">
         <button
           (click)="openBookingModal(row.nume, row.id)"
+          type="button"
           [disabled]="currentUser.permisiune != 1"
           class="btn btn-sm table-icon"
           id="booking_button"
@@ -46,6 +48,7 @@
       <div matTooltip="Abonează-te să primești o notificare când resursa devine disponibilă" *ngIf="row.stare">
         <button
           (click)="abonareNotificari(row.id, currentUser.id)"
+          type="button"
           [disabled]="currentUser.permisiune != 1"
           class="btn btn-sm table-icon"
         >

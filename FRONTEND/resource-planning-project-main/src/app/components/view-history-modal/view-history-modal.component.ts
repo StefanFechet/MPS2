@@ -34,13 +34,13 @@ export class ViewHistoryModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  public getHistory(id) {
+  public getHistory(id): void {
     this.tableData = [];
     this.classroomService.getClassroomHistory(id).subscribe(data => {
       data.forEach(historyData => {
         historyData.start = new Date(historyData.start);
         historyData.finish = new Date(historyData.finish);
-        let differenceTravel = historyData.finish.getTime() - historyData.start.getTime();
+        const differenceTravel = historyData.finish.getTime() - historyData.start.getTime();
 
         historyData.estimat_rezervare = ((differenceTravel) / 1000) / 60;
 
